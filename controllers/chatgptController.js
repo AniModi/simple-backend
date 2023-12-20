@@ -1,6 +1,7 @@
 const OpenAI = require("openai");
 
 const key = process.env.OPENAI_API_KEY;
+const model = process.env.GPT_MODEL;
 
 const openai = new OpenAI(key);
 
@@ -43,7 +44,7 @@ async function getRhyme(req, res) {
           I want you to act as a news headline rhymer. Based on above knowledge and any other knowledge you possess about rhyming, you have to give me a rhyming version of the provided news headline. You shall be careful to not change the meaning of the headline. The headline is "${headline}"`,
         },
       ],
-      model: "gpt-3.5-turbo-1106",
+      model: model,
     });
 
     const response = chat.choices[0].message.content;
@@ -92,7 +93,7 @@ async function getBias(req, res) {
             I want you to act as a news bias detection expert. Based on the above knowledge and any other knowledge you posses about biasness in news media, you have to give me a summary of any bias that is present in the provided news article. If the article is unbiased, report accordingly. The news article is "${content}"`,
         },
       ],
-      model: "gpt-3.5-turbo-1106",
+      model: model,
     });
 
     const response = chat.choices[0].message.content;
