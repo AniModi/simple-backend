@@ -7,7 +7,6 @@ const openai = new OpenAI(key);
 async function getRhyme(req, res) {
   try {
     const { headline } = req.body;
-    console.log(headline);
     const chat = await openai.chat.completions.create({
       messages: [
         {
@@ -48,7 +47,6 @@ async function getRhyme(req, res) {
     });
 
     const response = chat.choices[0].message.content;
-    console.log(response);
     res.json(response);
   } catch (err) {
     console.log(err);
@@ -98,7 +96,6 @@ async function getBias(req, res) {
     });
 
     const response = chat.choices[0].message.content;
-    console.log(response);
     res.json(response);
   } catch (err) {
     console.log(err);
