@@ -23,5 +23,9 @@ app.listen(port, () => console.log(`Server running on port ${port}`));
 connectToMongo();
 
 const authRoutes = require("./routes/authRoutes");
+const newsRoutes = require("./routes/newsRoutes");
+const chatgptRoutes = require("./routes/chatgptRoutes");
 
 app.use("/api/auth", authRoutes);
+app.use("/api", newsRoutes);
+app.use("/api", chatgptRoutes);
