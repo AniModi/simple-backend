@@ -1,3 +1,6 @@
+const axios = require("axios");
+const {Readability} = require("@mozilla/readability");
+const { JSDOM } = require("jsdom");
 const key = process.env.NEWS_API_KEY;
 
 async function getNews(req, res) {
@@ -25,6 +28,30 @@ async function getNews(req, res) {
   }
 }
 
+
+async function getNewsData(req, res) {
+  try {
+    const { url } = req.body;
+    axios.get(url).then(function (r2) {
+      let dom = new JSDOM(r2.data, {
+        url: url,
+      });
+
+      let article = new Readability(dom.window.document).parse();
+
+      const headline = article.title;
+      const content = article.textContent;
+
+
+      res.status(200).json({ headline, content });
+
+    });
+  } catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getNews,
+  getNewsData
 };
