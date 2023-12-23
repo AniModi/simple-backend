@@ -77,8 +77,21 @@ async function addNewsData(req, res) {
   }
 }
 
+async function fetchNewsData(req, res) {
+  try {
+    const { email } = req.body;
+
+    const news = await UserNews.find({ email });
+    res.status(200).json(news);
+  }
+  catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getNews,
   getNewsData,
   addNewsData,
+  fetchNewsData
 };
