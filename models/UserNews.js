@@ -17,12 +17,12 @@ const UserNewsSchema = new Schema({
   },
   bias: {
     type: String,
-    required: true
+    required: true,
   },
   link: {
     type: String,
     required: true,
-    dropDupes: true
+    unique: true
   }
 });
 
