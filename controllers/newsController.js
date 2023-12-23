@@ -1,6 +1,7 @@
 const axios = require("axios");
 const {Readability} = require("@mozilla/readability");
 const { JSDOM } = require("jsdom");
+const UserNews = require("../models/UserNews");
 const key = process.env.NEWS_API_KEY;
 
 async function getNews(req, res) {
@@ -51,7 +52,34 @@ async function getNewsData(req, res) {
   }
 }
 
+
+async function addNewsData(req, res) {
+  try {
+
+    const { email, headline, rhymingHeadline, bias, link } = req.body;
+
+    console.log(email);
+
+    const newNews = new UserNews({
+      email,
+      headline,
+      rhymingHeadline,
+      bias,
+      link,
+    });
+
+    const savedNews = await newNews.save();
+
+    res.status(200).json(savedNews);
+
+  }
+  catch (err) {
+    res.status(500).json({ message: err.message });
+  }
+}
+
 module.exports = {
   getNews,
-  getNewsData
+  getNewsData,
+  addNewsData,
 };
