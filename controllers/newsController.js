@@ -58,7 +58,6 @@ async function addNewsData(req, res) {
 
     const { email, headline, rhymingHeadline, bias, link } = req.body;
 
-    console.log(email);
 
     const newNews = new UserNews({
       email,
