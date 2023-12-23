@@ -21,8 +21,7 @@ const UserNewsSchema = new Schema({
   },
   link: {
     type: String,
-    required: true,
-    unique: true
+    required: true
   }
 });
 
